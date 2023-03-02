@@ -7,7 +7,7 @@ const port = 3000;
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/api", router);
+app.use(router);
 
 // Connect to DATABASE
 const DATABASE_URL =
