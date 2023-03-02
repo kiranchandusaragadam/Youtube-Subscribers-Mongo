@@ -9,10 +9,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/", router);
 
-app.get("/home", (req, res) => {
-  res.send("Hello iam working");
-});
-
 // Connect to DATABASE
 const DATABASE_URL =
   "mongodb+srv://Kiranchandu:Mongo1999@cluster0.iyubwyu.mongodb.net/?retryWrites=true&w=majority";
