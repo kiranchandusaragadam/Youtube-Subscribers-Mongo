@@ -10,10 +10,6 @@ router.get("/", (req, res) => {
   );
 });
 
-router.get("/home", (req, res) => {
-  res.send("Hello iam working");
-});
-
 // to get all subscribers
 router.get("/subscribers", async (req, res) => {
   try {
