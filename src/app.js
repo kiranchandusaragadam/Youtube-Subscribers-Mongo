@@ -1,17 +1,17 @@
 const express = require("express");
-const app = express();
+const router = express.Router();
 const subscriberModel = require("./models/subscribers");
 const { ObjectId } = require("mongodb");
 
 // Your code goes here
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.json(
     "Hello, This is Get Youtube Subscribers Capstone Project using MongoDB Node.js made by Kiranchandu Saragadam"
   );
 });
 
 // to get all subscribers
-app.get("/subscribers", async (req, res) => {
+router.get("/subscribers", async (req, res) => {
   try {
     const allSubscribers = await subscriberModel.find();
     res.status(200).send(allSubscribers);
@@ -21,7 +21,7 @@ app.get("/subscribers", async (req, res) => {
 });
 
 // to get particular fields of all subscribers
-app.get("/subscribers/names", async (req, res) => {
+router.get("/subscribers/names", async (req, res) => {
   try {
     const subscribers = await subscriberModel
       .find()
@@ -33,7 +33,7 @@ app.get("/subscribers/names", async (req, res) => {
 });
 
 // to get individual subscriber by id
-app.get("/subscribers/:id", async (req, res) => {
+router.get("/subscribers/:id", async (req, res) => {
   if (ObjectId.isValid(req.params.id)) {
     try {
       const subscriber = await subscriberModel.findOne({
@@ -49,7 +49,7 @@ app.get("/subscribers/:id", async (req, res) => {
 });
 
 // to add subscriber details
-app.post("/subscribers/add", async (req, res) => {
+router.post("/subscribers/add", async (req, res) => {
   const body = req.body;
   const newSubscriber = new subscriberModel(body);
   try {
@@ -61,7 +61,7 @@ app.post("/subscribers/add", async (req, res) => {
 });
 
 // to update document by id
-app.patch("/subscribers/update/:id", async (req, res) => {
+router.patch("/subscribers/update/:id", async (req, res) => {
   if (ObjectId.isValid(req.params.id)) {
     try {
       const updateSubscriber = await subscriberModel.findOne({
@@ -84,7 +84,7 @@ app.patch("/subscribers/update/:id", async (req, res) => {
 });
 
 // to delete document by id
-app.delete("/subscribers/delete/:id", async (req, res) => {
+router.delete("/subscribers/delete/:id", async (req, res) => {
   if (ObjectId.isValid(req.params.id)) {
     const subscriber = await subscriberModel
       .deleteOne({
@@ -101,4 +101,4 @@ app.delete("/subscribers/delete/:id", async (req, res) => {
   }
 });
 
-module.exports = app;
+module.exports = router;
